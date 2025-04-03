@@ -113,6 +113,39 @@ The application uses Python's logging module with the following features:
 - Detailed error messages
 - Operation success/failure logging
 
+## Using with Claude Desktop
+
+To use this Redis MCP server with Claude Desktop, add the following configuration to your Claude Desktop settings:
+
+```json
+{
+  "mcpServers": {
+    "redis": {
+            "command": "docker",
+            "args": [
+                "run", 
+                "-i",
+                "--rm",
+                "--network",
+                "customredis_redis-network",
+                "customredis-mcp-server"]
+    }
+  }
+}
+```
+
+This configuration:
+- Uses Docker to run the Redis MCP server
+- Connects to Redis using the host machine's Redis instance
+- Runs in interactive mode (-i)
+- Removes the container after use (--rm)
+- Connect the MCP server to same network to Redis container
+
+Make sure:
+1. Redis is running in container from docker-compose redis service
+2. The Redis port (6379) is accessible
+3. Docker is running on your system
+
 ## License
 
 MIT License
